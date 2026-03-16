@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italiano B2 — PLIDA Felkészítő</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0f;--bg2:#131316;--bg3:#1a1a1f;--surface:#1f1f26;--surface2:#26262f;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --ink:#f0ede6;--ink2:#9a9490;--ink3:#5a5650;
+  --gold:#c9922a;--gold2:#e8b84b;--gold-dim:rgba(201,146,42,0.15);--gold-glow:rgba(201,146,42,0.08);
+  --green:#2d7a55;--green-light:rgba(45,122,85,0.2);
+  --red:#8b3030;--red-light:rgba(139,48,48,0.2);
+  --blue:#2a5a8b;--blue-light:rgba(42,90,139,0.2);
+  --r:12px;--r2:18px;
+  --font-d:'Cormorant Garamond',Georgia,serif;--font-b:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:15px;min-height:100vh;overflow-x:hidden}
+#sidebar{position:fixed;left:0;top:0;width:220px;height:100vh;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:100;transition:transform 0.3s;overflow-y:auto}
+.logo{padding:24px 20px 20px;border-bottom:1px solid var(--border)}
+.logo h1{font-family:var(--font-d);font-size:1.4rem;font-weight:600;color:var(--ink);line-height:1.2}
+.logo h1 span{color:var(--gold);font-style:italic}
+.logo p{font-size:0.7rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
+nav{flex:1;padding:16px 10px;display:flex;flex-direction:column;gap:2px}
+.nav-section{font-size:0.62rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.1em;padding:10px 12px 4px;margin-top:6px}
+.nav-btn{background:none;border:none;width:100%;text-align:left;padding:10px 12px;border-radius:var(--r);font-family:var(--font-b);font-size:0.82rem;color:var(--ink2);cursor:pointer;transition:all 0.18s;display:flex;align-items:center;gap:10px}
+.nav-btn .icon{width:18px;text-align:center;font-size:0.95rem}
+.nav-btn:hover{background:var(--surface);color:var(--ink)}
+.nav-btn.active{background:var(--gold-dim);color:var(--gold2);font-weight:500}
+.sidebar-bottom{padding:16px;border-top:1px solid var(--border)}
+.streak-badge{background:var(--gold-dim);border:1px solid rgba(201,146,42,0.25);border-radius:var(--r);padding:10px 14px;display:flex;align-items:center;gap:10px}
+.streak-badge .fire{font-size:1.2rem}
+.streak-badge .info .num{font-size:1.1rem;font-weight:600;color:var(--gold2)}
+.streak-badge .info .lbl{font-size:0.68rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em}
+#main{margin-left:220px;min-height:100vh;padding:32px 32px 64px}
+.screen{display:none;animation:fadeIn 0.25s ease}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.page-header{margin-bottom:28px}
+.page-header h2{font-family:var(--font-d);font-size:2rem;font-weight:600;color:var(--ink)}
+.page-header h2 em{color:var(--gold);font-style:italic}
+.page-header p{color:var(--ink2);font-size:0.85rem;margin-top:4px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px}
+.card-sm{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.stat .n{font-family:var(--font-d);font-size:2rem;font-weight:600;color:var(--ink);line-height:1}
+.stat .n.gold{color:var(--gold2)}.stat .n.green{color:#4db880}
+.stat .l{font-size:0.7rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px}
+.progress-bar-wrap{height:4px;background:var(--surface2);border-radius:10px;margin-bottom:24px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:10px;transition:width 0.4s ease}
+.fc-layout{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
+.flashcard-scene{perspective:1400px;margin-bottom:16px}
+.flashcard-inner{position:relative;height:280px;transform-style:preserve-3d;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);cursor:pointer}
+.flashcard-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;border:1px solid var(--border)}
+.fc-front{background:var(--surface)}
+.fc-back{background:var(--bg3);transform:rotateY(180deg);border-color:var(--gold-dim)}
+.fc-tag{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink3);margin-bottom:12px}
+.fc-word{font-family:var(--font-d);font-size:2.6rem;font-weight:700;color:var(--ink);text-align:center;line-height:1.1}
+.fc-cat{display:inline-block;font-size:0.72rem;background:var(--gold-dim);color:var(--gold2);padding:3px 12px;border-radius:20px;margin-top:10px;font-weight:500}
+.fc-pron{font-family:var(--font-d);font-style:italic;font-size:1rem;color:var(--ink3);margin-top:6px}
+.fc-hint{font-size:0.82rem;color:var(--ink2);margin-top:6px}
+.fc-ex{font-size:0.82rem;color:var(--ink2);font-style:italic;text-align:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);width:100%;line-height:1.5}
+.flip-hint{text-align:center;font-size:0.75rem;color:var(--ink3);margin-bottom:12px}
+.rating-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.rate-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 6px;cursor:pointer;font-family:var(--font-b);font-size:0.75rem;color:var(--ink2);text-align:center;transition:all 0.15s;line-height:1.4}
+.rate-btn .ri{font-size:1.3rem;display:block;margin-bottom:3px}
+.rate-btn:hover{transform:translateY(-2px)}
+.rate-btn.r1:hover{background:var(--red-light);border-color:var(--red);color:#e07070}
+.rate-btn.r2:hover{background:rgba(180,100,20,0.2);border-color:#b46414;color:#e0903a}
+.rate-btn.r3:hover{background:var(--gold-dim);border-color:var(--gold);color:var(--gold2)}
+.rate-btn.r4:hover{background:var(--green-light);border-color:var(--green);color:#4db880}
+.rate-locked{opacity:0.3;pointer-events:none}
+.fc-nav{display:flex;justify-content:space-between;align-items:center}
+.fc-nav .cnt{font-size:0.82rem;color:var(--ink3)}
+.btn{background:var(--surface2);border:1px solid var(--border2);border-radius:50px;padding:9px 22px;font-family:var(--font-b);font-size:0.82rem;color:var(--ink2);cursor:pointer;transition:all 0.15s}
+.btn:hover{background:var(--surface);color:var(--ink)}
+.btn-gold{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn-gold:hover{opacity:0.88;color:#fff}
+.btn-sm{padding:6px 14px;font-size:0.78rem}
+.session-done{text-align:center;padding:3rem 2rem;max-width:440px;margin:0 auto}
+.session-done .big{font-size:3.5rem;margin-bottom:16px}
+.session-done h3{font-family:var(--font-d);font-size:2rem;margin-bottom:8px;color:var(--ink)}
+.session-done p{color:var(--ink2);margin-bottom:20px;font-size:0.9rem}
+.done-pills{display:flex;gap:10px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.done-pill{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 20px;text-align:center}
+.done-pill strong{display:block;font-family:var(--font-d);font-size:1.5rem;color:var(--ink)}
+.done-pill span{font-size:0.72rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em}
+.session-start{text-align:center;padding:2rem;max-width:420px;margin:0 auto}
+.session-start h3{font-family:var(--font-d);font-size:1.6rem;margin-bottom:8px}
+.session-start p{color:var(--ink2);font-size:0.88rem;margin-bottom:20px}
+.due-list{margin-top:12px}
+.due-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.due-item:last-child{border:none}
+.due-item .di-word{font-family:var(--font-d);font-size:1rem;font-weight:600;min-width:110px;color:var(--ink)}
+.due-item .di-tr{font-size:0.82rem;color:var(--ink2);flex:1}
+.due-item .di-lv{font-size:0.68rem;padding:2px 8px;border-radius:20px}
+.lv-new{background:var(--blue-light);color:#6aabf0}
+.lv-learning{background:rgba(180,100,20,0.2);color:#e0903a}
+.lv-review{background:var(--gold-dim);color:var(--gold2)}
+.lv-known{background:var(--green-light);color:#4db880}
+/* QUIZ */
+.quiz-wrap{max-width:580px}
+.q-progress{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.q-progress .qp-bar{flex:1;height:4px;background:var(--surface2);border-radius:10px;overflow:hidden}
+.q-progress .qp-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:10px;transition:width 0.4s}
+.q-progress .qp-num{font-size:0.78rem;color:var(--ink3);min-width:40px;text-align:right}
+.q-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:2rem;text-align:center;margin-bottom:16px}
+.q-type{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink3);margin-bottom:10px}
+.q-word{font-family:var(--font-d);font-size:2.2rem;font-weight:700;color:var(--ink)}
+.q-cat{display:inline-block;font-size:0.72rem;background:var(--gold-dim);color:var(--gold2);padding:3px 12px;border-radius:20px;margin-top:8px;font-weight:500}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.q-opt{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;cursor:pointer;font-family:var(--font-b);font-size:0.88rem;color:var(--ink2);text-align:left;transition:all 0.15s}
+.q-opt:hover:not(.ql){background:var(--surface2);border-color:var(--border2);color:var(--ink)}
+.q-opt.correct{background:var(--green-light);border-color:var(--green);color:#4db880;font-weight:500}
+.q-opt.wrong{background:var(--red-light);border-color:var(--red);color:#e07070}
+.q-fb{border-radius:var(--r);padding:12px 16px;margin-bottom:12px;font-size:0.85rem;display:none}
+.q-fb.show{display:block}
+.q-fb.ok{background:var(--green-light);border:1px solid var(--green);color:#4db880}
+.q-fb.nok{background:var(--red-light);border:1px solid var(--red);color:#e07070}
+/* SPEED ROUND */
+.speed-wrap{max-width:500px}
+.speed-timer{text-align:center;margin-bottom:20px}
+.speed-timer .time{font-family:var(--font-d);font-size:4rem;font-weight:700;color:var(--gold2);line-height:1}
+.speed-timer .time.danger{color:#e07070}
+.speed-timer .label{font-size:0.75rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em}
+.speed-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:2rem;text-align:center;margin-bottom:16px}
+.speed-word{font-family:var(--font-d);font-size:2.5rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.speed-input{width:100%;background:var(--bg3);border:2px solid var(--border);border-radius:var(--r);padding:14px 16px;font-family:var(--font-b);font-size:1.1rem;color:var(--ink);text-align:center;outline:none;transition:border-color 0.18s}
+.speed-input:focus{border-color:var(--gold)}
+.speed-input.correct-anim{border-color:#4db880;background:var(--green-light)}
+.speed-input.wrong-anim{border-color:#e07070;background:var(--red-light)}
+.speed-score{display:flex;gap:16px;justify-content:center;margin-bottom:16px}
+.speed-score .ss{text-align:center}
+.speed-score .ss .n{font-family:var(--font-d);font-size:1.8rem;font-weight:700}
+.speed-score .ss .l{font-size:0.7rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em}
+.speed-score .ss.ok .n{color:#4db880}
+.speed-score .ss.nok .n{color:#e07070}
+/* MONDATALKOTÁS */
+.mondat-wrap{max-width:600px}
+.mondat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px;margin-bottom:16px}
+.mondat-word{font-family:var(--font-d);font-size:1.8rem;font-weight:700;color:var(--gold2);margin-bottom:4px}
+.mondat-tr{font-size:0.85rem;color:var(--ink2);margin-bottom:4px}
+.mondat-colloc{font-size:0.78rem;color:var(--ink3);font-style:italic;margin-bottom:14px}
+.mondat-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;font-family:var(--font-b);font-size:0.9rem;color:var(--ink);resize:none;outline:none;transition:border-color 0.18s}
+.mondat-input:focus{border-color:var(--gold)}
+.mondat-actions{display:flex;gap:8px;margin-top:10px}
+.mondat-result{margin-top:10px;padding:12px 14px;border-radius:var(--r);font-size:0.85rem;display:none;line-height:1.6}
+.mondat-result.show{display:block}
+.mondat-result.checking{background:var(--gold-glow);border:1px solid rgba(201,146,42,0.2);color:var(--gold2)}
+.mondat-result.done{background:var(--surface2);border:1px solid var(--border2);color:var(--ink2)}
+.mondat-result .good{color:#4db880;font-weight:500}
+.mondat-result .fix{color:#e07070}
+/* AI CHAT */
+.chat-wrap{max-width:640px}
+.chat-topic-select{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.ct-btn{background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:7px 16px;font-size:0.78rem;cursor:pointer;color:var(--ink2);transition:all 0.15s;font-family:var(--font-b)}
+.ct-btn.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+.ct-btn:hover:not(.active){background:var(--surface2);color:var(--ink)}
+.chat-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);height:420px;overflow-y:auto;padding:16px;margin-bottom:12px;display:flex;flex-direction:column;gap:12px}
+.chat-msg{max-width:80%;padding:12px 16px;border-radius:14px;font-size:0.88rem;line-height:1.6}
+.chat-msg.ai{background:var(--bg3);border:1px solid var(--border);color:var(--ink);align-self:flex-start;border-bottom-left-radius:4px}
+.chat-msg.user{background:var(--gold-dim);border:1px solid rgba(201,146,42,0.2);color:var(--ink);align-self:flex-end;border-bottom-right-radius:4px}
+.chat-msg.correction{background:rgba(45,122,85,0.1);border:1px solid rgba(45,122,85,0.3);color:var(--ink);align-self:flex-start;border-bottom-left-radius:4px;font-size:0.82rem}
+.chat-msg .msg-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink3);margin-bottom:4px}
+.chat-typing{align-self:flex-start;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:4px;color:var(--ink3);font-size:0.85rem;display:none}
+.chat-typing.show{display:block}
+.chat-input-row{display:flex;gap:8px}
+.chat-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:50px;padding:10px 18px;font-family:var(--font-b);font-size:0.88rem;color:var(--ink);outline:none;transition:border-color 0.18s}
+.chat-input:focus{border-color:var(--gold)}
+.chat-suggestions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.cs-btn{background:var(--surface2);border:1px solid var(--border);border-radius:50px;padding:5px 12px;font-size:0.72rem;cursor:pointer;color:var(--ink2);font-family:var(--font-b);transition:all 0.15s}
+.cs-btn:hover{background:var(--gold-dim);color:var(--gold2);border-color:var(--gold)}
+/* KOLLOKÁCIÓ */
+.colloc-wrap{max-width:600px}
+.colloc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px;margin-bottom:12px}
+.colloc-word{font-family:var(--font-d);font-size:1.6rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.colloc-tr{font-size:0.82rem;color:var(--ink2);margin-bottom:12px}
+.colloc-grid{display:grid;gap:6px}
+.colloc-item{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;display:flex;align-items:center;gap:10px}
+.colloc-item .ci-it{font-family:var(--font-d);font-size:1rem;font-weight:600;color:var(--gold2);min-width:160px}
+.colloc-item .ci-hu{font-size:0.82rem;color:var(--ink2);flex:1}
+.colloc-item .ci-ex{font-size:0.78rem;color:var(--ink3);font-style:italic}
+/* FORDÍTÁS */
+.forditas-wrap{max-width:640px}
+.week-selector{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.ws-btn{background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:7px 16px;font-size:0.78rem;cursor:pointer;color:var(--ink2);transition:all 0.15s;font-family:var(--font-b)}
+.ws-btn.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+.ws-btn:hover:not(.active){background:var(--surface2);color:var(--ink)}
+.sentence-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px;margin-bottom:16px}
+.sc-num{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink3);margin-bottom:8px}
+.sc-hu{font-family:var(--font-d);font-size:1.2rem;color:var(--ink);margin-bottom:12px;line-height:1.4}
+.sc-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;font-family:var(--font-b);font-size:0.9rem;color:var(--ink);resize:none;outline:none;transition:border-color 0.18s}
+.sc-input:focus{border-color:var(--gold)}
+.sc-actions{display:flex;gap:8px;margin-top:10px;align-items:center}
+.sc-result{margin-top:10px;padding:10px 14px;border-radius:var(--r);font-size:0.85rem;display:none}
+.sc-result.show{display:block}
+.sc-result.checking{background:var(--gold-glow);border:1px solid rgba(201,146,42,0.2);color:var(--gold2)}
+.sc-result.done{background:var(--surface2);border:1px solid var(--border2);color:var(--ink2);line-height:1.6}
+.sc-result .correct-line{color:#4db880;font-weight:500}
+.sc-result .note-line{color:var(--gold2);font-style:italic}
+/* TERV */
+.plan-grid{display:grid;gap:10px}
+.week-row{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;transition:border-color 0.18s;cursor:pointer}
+.week-row:hover{border-color:var(--border2)}
+.week-row.current-week{border-color:var(--gold);background:var(--gold-glow)}
+.wr-num{font-family:var(--font-d);font-size:1.4rem;font-weight:600;color:var(--ink3)}
+.wr-num.cw{color:var(--gold2)}
+.wr-info h4{font-size:0.9rem;font-weight:500;color:var(--ink);margin-bottom:2px}
+.wr-info p{font-size:0.75rem;color:var(--ink2)}
+.wr-badge{font-size:0.7rem;padding:4px 10px;border-radius:20px;font-weight:500;white-space:nowrap}
+.wb-current{background:var(--gold-dim);color:var(--gold2)}
+.wb-done{background:var(--green-light);color:#4db880}
+.wb-future{background:var(--surface2);color:var(--ink3)}
+.week-detail{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px;margin-top:16px;display:none}
+.week-detail.show{display:block}
+.wd-title{font-family:var(--font-d);font-size:1.4rem;margin-bottom:14px;color:var(--ink)}
+.wd-days{display:grid;gap:8px}
+.wd-day{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px}
+.wd-day h5{font-size:0.8rem;font-weight:500;color:var(--gold2);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em}
+.wd-day p{font-size:0.82rem;color:var(--ink2);line-height:1.5}
+/* HALADÁS */
+.progress-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cat-progress-item{margin-bottom:10px}
+.cpi-header{display:flex;justify-content:space-between;font-size:0.8rem;color:var(--ink2);margin-bottom:5px}
+.cpi-bar{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
+.cpi-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:10px;transition:width 0.7s ease}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-cell{aspect-ratio:1;border-radius:5px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:var(--ink3)}
+.cal-cell.cdone{background:var(--gold);color:#fff}
+.cal-cell.ctoday{background:rgba(201,146,42,0.3);border:1.5px solid var(--gold);color:var(--gold2);font-weight:600}
+.cal-cell.cempty{background:transparent}
+/* SZÓTÁR */
+.dict-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.df-btn{background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:6px 14px;font-size:0.75rem;cursor:pointer;color:var(--ink2);transition:all 0.15s;font-family:var(--font-b)}
+.df-btn.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+.dict-grid{display:grid;gap:6px}
+.dict-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;display:grid;grid-template-columns:140px 1fr 70px 70px;gap:10px;align-items:center}
+.di-it{font-family:var(--font-d);font-size:1.05rem;font-weight:600;color:var(--ink)}
+.di-hu{font-size:0.85rem;color:var(--ink2)}
+.di-lv{font-size:0.68rem;padding:2px 8px;border-radius:20px;text-align:center}
+.di-next{font-size:0.72rem;color:var(--ink3);text-align:right}
+.hamburger{display:none;position:fixed;top:14px;left:14px;z-index:200;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:1.1rem}
+@media(max-width:768px){
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  #main{margin-left:0;padding:20px 16px 60px}
+  .hamburger{display:block}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .fc-layout{grid-template-columns:1fr}
+  .fc-sidebar-panel{display:none}
+  .q-opts{grid-template-columns:1fr}
+  .progress-grid{grid-template-columns:1fr}
+  .dict-item{grid-template-columns:110px 1fr 60px}
+  .dict-item .di-next{display:none}
+  .week-row{grid-template-columns:50px 1fr}
+  .wr-badge{display:none}
+  .chat-msg{max-width:95%}
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+<aside id="sidebar">
+  <div class="logo">
+    <h1>Italiano <span>B2</span></h1>
+    <p>PLIDA Felkészítő</p>
+  </div>
+  <nav>
+    <div class="nav-section">Tanulás</div>
+    <button class="nav-btn active" onclick="showScreen('flashcards')"><span class="icon">🃏</span>Flashkártyák</button>
+    <button class="nav-btn" onclick="showScreen('quiz')"><span class="icon">🎯</span>Napi kvíz</button>
+    <button class="nav-btn" onclick="showScreen('speed')"><span class="icon">⚡</span>Speed round</button>
+    <div class="nav-section">Produkció</div>
+    <button class="nav-btn" onclick="showScreen('mondat')"><span class="icon">✏️</span>Mondatalkotás</button>
+    <button class="nav-btn" onclick="showScreen('forditas')"><span class="icon">✍️</span>Fordítás</button>
+    <button class="nav-btn" onclick="showScreen('chat')"><span class="icon">💬</span>AI párbeszéd</button>
+    <div class="nav-section">Szókincs</div>
+    <button class="nav-btn" onclick="showScreen('kollokacio')"><span class="icon">🔗</span>Kollokációk</button>
+    <button class="nav-btn" onclick="showScreen('szotar')"><span class="icon">📖</span>Szótár</button>
+    <div class="nav-section">Tervezés</div>
+    <button class="nav-btn" onclick="showScreen('terv')"><span class="icon">📅</span>24 hetes terv</button>
+    <button class="nav-btn" onclick="showScreen('progress')"><span class="icon">📊</span>Haladás</button>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="streak-badge">
+      <span class="fire">🔥</span>
+      <div class="info"><div class="num" id="sb-streak">0</div><div class="lbl">nap streak</div></div>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+
+<!-- FLASHKÁRTYÁK -->
+<div id="screen-flashcards" class="screen active">
+  <div class="page-header"><h2>Flash<em>kártyák</em></h2><p>Spaced repetition — az agy természetes tanulási ritmusára szabva</p></div>
+  <div id="fc-start">
+    <div class="stats-grid">
+      <div class="stat"><div class="n gold" id="fc-due-count">0</div><div class="l">Esedékes ma</div></div>
+      <div class="stat"><div class="n" id="fc-total">0</div><div class="l">Összes szó</div></div>
+      <div class="stat"><div class="n green" id="fc-known">0</div><div class="l">Megtanult</div></div>
+      <div class="stat"><div class="n" id="fc-sessions">0</div><div class="l">Gyakorlás</div></div>
+    </div>
+    <div class="card" style="max-width:500px;margin-bottom:16px">
+      <div class="session-start">
+        <div style="font-size:2.5rem;margin-bottom:12px">🇮🇹</div>
+        <h3 id="fc-start-title">Mai szavak</h3>
+        <p id="fc-start-desc">Kattints a kezdéshez!</p>
+        <button class="btn btn-gold" onclick="startFlashcards()">Tanulás kezdése →</button>
+      </div>
+    </div>
+    <div class="card" style="max-width:500px">
+      <p style="font-size:0.78rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px">Esedékes kártyák</p>
+      <div class="due-list" id="due-list"></div>
+    </div>
+  </div>
+  <div id="fc-study" style="display:none">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="fc-prog"></div></div>
+    <div class="fc-layout">
+      <div>
+        <div class="flip-hint">Kattints a kártyára a fordításhoz ↕</div>
+        <div class="flashcard-scene">
+          <div class="flashcard-inner" id="fc-inner" onclick="flipCard()">
+            <div class="fc-face fc-front">
+              <div class="fc-tag">Olasz szó</div>
+              <div class="fc-word" id="fc-it">—</div>
+              <div class="fc-cat" id="fc-cat">—</div>
+              <div class="fc-hint" id="fc-hint"></div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-tag">Magyar fordítás</div>
+              <div class="fc-word" id="fc-hu">—</div>
+              <div class="fc-pron" id="fc-pron"></div>
+              <div class="fc-ex" id="fc-ex"></div>
+            </div>
+          </div>
+        </div>
+        <div class="rating-grid rate-locked" id="rating-grid">
+          <button class="rate-btn r1" onclick="rateCard(1)"><span class="ri">😵</span>Nem tudtam</button>
+          <button class="rate-btn r2" onclick="rateCard(2)"><span class="ri">😕</span>Nehéz volt</button>
+          <button class="rate-btn r3" onclick="rateCard(3)"><span class="ri">🙂</span>Majdnem</button>
+          <button class="rate-btn r4" onclick="rateCard(4)"><span class="ri">😄</span>Könnyen ment</button>
+        </div>
+        <div class="fc-nav">
+          <button class="btn" onclick="skipCard()">Kihagyás</button>
+          <span class="cnt" id="fc-counter">0 / 0</span>
+          <button class="btn" onclick="endSession()">Befejezés</button>
+        </div>
+      </div>
+      <div class="fc-sidebar-panel">
+        <div class="card">
+          <p style="font-size:0.72rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Értékelési útmutató</p>
+          <div style="display:grid;gap:8px">
+            <div class="card-sm"><div style="color:#e07070;font-weight:500;font-size:0.8rem;margin-bottom:2px">😵 Nem tudtam</div><div style="font-size:0.75rem;color:var(--ink3)">Holnap újra jön</div></div>
+            <div class="card-sm"><div style="color:#e0903a;font-weight:500;font-size:0.8rem;margin-bottom:2px">😕 Nehéz volt</div><div style="font-size:0.75rem;color:var(--ink3)">2-3 napon belül</div></div>
+            <div class="card-sm"><div style="color:var(--gold2);font-weight:500;font-size:0.8rem;margin-bottom:2px">🙂 Majdnem</div><div style="font-size:0.75rem;color:var(--ink3)">1 héten belül</div></div>
+            <div class="card-sm"><div style="color:#4db880;font-weight:500;font-size:0.8rem;margin-bottom:2px">😄 Könnyen ment</div><div style="font-size:0.75rem;color:var(--ink3)">2+ hét múlva</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="fc-done" style="display:none">
+    <div class="session-done">
+      <div class="big">🎉</div><h3>Bravo!</h3>
+      <p id="fc-done-msg"></p>
+      <div class="done-pills" id="fc-done-pills"></div>
+      <button class="btn btn-gold" onclick="resetFC()">Újabb kör ↺</button>
+    </div>
+  </div>
+</div>
+
+<!-- KVÍZ -->
+<div id="screen-quiz" class="screen">
+  <div class="page-header"><h2>Napi <em>kvíz</em></h2><p>10 kérdés — teszteld az aktív szókincsed</p></div>
+  <div class="quiz-wrap">
+    <div id="qz-start"><div class="card" style="text-align:center;padding:2.5rem"><div style="font-size:2.5rem;margin-bottom:12px">🎯</div><h3 style="font-family:var(--font-d);font-size:1.6rem;margin-bottom:8px;color:var(--ink)">Kvíz indítása</h3><p style="color:var(--ink2);font-size:0.88rem;margin-bottom:20px">Magyar szóból válaszd ki a helyes olasz megfelelőt</p><button class="btn btn-gold" onclick="startQuiz()">Kezdés →</button></div></div>
+    <div id="qz-game" style="display:none">
+      <div class="q-progress"><div class="qp-bar"><div class="qp-fill" id="qz-prog"></div></div><div class="qp-num" id="qz-num">0/10</div></div>
+      <div class="q-box"><div class="q-type">Hogyan mondják olaszul?</div><div class="q-word" id="qz-word">—</div><div class="q-cat" id="qz-cat">—</div></div>
+      <div class="q-opts" id="qz-opts"></div>
+      <div class="q-fb" id="qz-fb"></div>
+      <div style="text-align:right"><button class="btn" id="qz-next" onclick="nextQuiz()" style="display:none">Következő →</button></div>
+    </div>
+    <div id="qz-done" style="display:none"><div class="session-done"><div class="big" id="qz-icon">🏆</div><h3 id="qz-title"></h3><p id="qz-msg"></p><div class="done-pills" id="qz-pills"></div><button class="btn btn-gold" onclick="resetQuiz()">Újra →</button></div></div>
+  </div>
+</div>
+
+<!-- SPEED ROUND -->
+<div id="screen-speed" class="screen">
+  <div class="page-header"><h2>Speed <em>round</em></h2><p>60 másodperc — minél több szót írj le olaszul!</p></div>
+  <div class="speed-wrap">
+    <div id="sp-start"><div class="card" style="text-align:center;padding:2.5rem"><div style="font-size:2.5rem;margin-bottom:12px">⚡</div><h3 style="font-family:var(--font-d);font-size:1.6rem;margin-bottom:8px;color:var(--ink)">Speed Round</h3><p style="color:var(--ink2);font-size:0.88rem;margin-bottom:8px">Látod a magyar szót — írd le olaszul, minél gyorsabban!</p><p style="color:var(--ink3);font-size:0.8rem;margin-bottom:20px">Enter = következő szó • Hibánál automatikusan megy tovább</p><button class="btn btn-gold" onclick="startSpeed()">Indítás! ⚡</button></div></div>
+    <div id="sp-game" style="display:none">
+      <div class="speed-timer"><div class="time" id="sp-time">60</div><div class="label">másodperc</div></div>
+      <div class="speed-score">
+        <div class="ss ok"><div class="n" id="sp-ok">0</div><div class="l">Helyes</div></div>
+        <div class="ss nok"><div class="n" id="sp-nok">0</div><div class="l">Hibás</div></div>
+      </div>
+      <div class="speed-card">
+        <div class="speed-word" id="sp-word">—</div>
+        <div style="font-size:0.78rem;color:var(--ink3);margin-bottom:12px" id="sp-cat">—</div>
+        <input type="text" class="speed-input" id="sp-input" placeholder="Írd le olaszul..." autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="speedKey(event)">
+      </div>
+      <div id="sp-last" style="font-size:0.82rem;color:var(--ink3);text-align:center;min-height:20px"></div>
+    </div>
+    <div id="sp-done" style="display:none"><div class="session-done"><div class="big">⚡</div><h3 id="sp-title"></h3><p id="sp-msg"></p><div class="done-pills" id="sp-pills"></div><button class="btn btn-gold" onclick="resetSpeed()">Újra →</button></div></div>
+  </div>
+</div>
+
+<!-- MONDATALKOTÁS -->
+<div id="screen-mondat" class="screen">
+  <div class="page-header"><h2>Mondat<em>alkotás</em></h2><p>Használd a szót mondatban — az agy így rögzíti igazán</p></div>
+  <div class="mondat-wrap">
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap" id="mondat-cats"></div>
+    <div id="mondat-cards"></div>
+  </div>
+</div>
+
+<!-- FORDÍTÁS -->
+<div id="screen-forditas" class="screen">
+  <div class="page-header"><h2>Fordítási <em>gyakorlat</em></h2><p>Írd le olaszul — az AI javítja és magyarázza</p></div>
+  <div class="forditas-wrap">
+    <div class="week-selector" id="ford-weeks"></div>
+    <div id="ford-sentences"></div>
+  </div>
+</div>
+
+<!-- AI PÁRBESZÉD -->
+<div id="screen-chat" class="screen">
+  <div class="page-header"><h2>AI <em>párbeszéd</em></h2><p>Csevegj olaszul — én válaszolok és javítom a hibákat</p></div>
+  <div class="chat-wrap">
+    <div class="chat-topic-select" id="chat-topics"></div>
+    <div class="chat-suggestions" id="chat-sugg"></div>
+    <div class="chat-box" id="chat-box">
+      <div class="chat-msg ai"><div class="msg-label">Professore AI</div>Ciao! Sono il tuo assistente di italiano. Scegli un argomento sopra e iniziamo a parlare! Scrivi pure in italiano — correggerò gli errori e risponderò. 🇮🇹</div>
+    </div>
+    <div class="chat-typing" id="chat-typing">Il professore sta scrivendo...</div>
+    <div class="chat-input-row">
+      <input type="text" class="chat-input" id="chat-input" placeholder="Scrivi in italiano..." onkeydown="chatKey(event)">
+      <button class="btn btn-gold btn-sm" onclick="sendChat()">Invia →</button>
+    </div>
+  </div>
+</div>
+
+<!-- KOLLOKÁCIÓK -->
+<div id="screen-kollokacio" class="screen">
+  <div class="page-header"><h2>Szó<em>kollokációk</em></h2><p>Ahogy az olaszok tényleg mondják — nem csak a szó, hanem a kontextus</p></div>
+  <div class="colloc-wrap" id="colloc-content"></div>
+</div>
+
+<!-- TERV -->
+<div id="screen-terv" class="screen">
+  <div class="page-header"><h2>24 hetes <em>tanulási terv</em></h2><p>PLIDA B2 — témakörönként felépítve</p></div>
+  <div class="plan-grid" id="plan-grid"></div>
+  <div class="week-detail" id="week-detail"></div>
+</div>
+
+<!-- HALADÁS -->
+<div id="screen-progress" class="screen">
+  <div class="page-header"><h2>Haladás <em>tracker</em></h2><p>Láthatod, hol tartasz</p></div>
+  <div class="stats-grid">
+    <div class="stat"><div class="n gold" id="pr-streak">0</div><div class="l">Nap streak</div></div>
+    <div class="stat"><div class="n" id="pr-total">0</div><div class="l">Összes szó</div></div>
+    <div class="stat"><div class="n green" id="pr-known">0</div><div class="l">Megtanult</div></div>
+    <div class="stat"><div class="n" id="pr-sessions">0</div><div class="l">Gyakorlás</div></div>
+  </div>
+  <div class="progress-grid">
+    <div class="card"><p style="font-size:0.78rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px">Témakörök szerint</p><div id="pr-cats"></div></div>
+    <div class="card"><p style="font-size:0.78rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px">Szintmegoszlás</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="pr-levels"></div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><p style="font-size:0.78rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px">Streak naptár — elmúlt 28 nap</p><div class="cal-grid" id="pr-cal"></div></div>
+</div>
+
+<!-- SZÓTÁR -->
+<div id="screen-szotar" class="screen">
+  <div class="page-header"><h2>Teljes <em>szótár</em></h2><p>Az összes szó szintjükkel és következő ismétlési dátummal</p></div>
+  <div class="dict-filter" id="dict-filter"></div>
+  <div class="dict-grid" id="dict-grid"></div>
+</div>
+
+</main>
+<script>
+// ══════════════════════════════════════════════════
+// SZAVAK — 120+ B2 szó, 9 témakör
+// ══════════════════════════════════════════════════
+const WORDS=[
+// EGÉSZSÉG
+{it:"la salute",hu:"az egészség",cat:"Egészség",ex:"La salute è la cosa più importante.",pron:"[la szalute]",hint:""},
+{it:"il medico",hu:"az orvos",cat:"Egészség",ex:"Devo andare dal medico domani.",pron:"[il mediko]",hint:""},
+{it:"la malattia",hu:"a betegség",cat:"Egészség",ex:"Ha una malattia cronica grave.",pron:"[la malattia]",hint:""},
+{it:"il farmaco",hu:"a gyógyszer",cat:"Egészség",ex:"Prendo il farmaco ogni mattina.",pron:"[il farmako]",hint:""},
+{it:"la dieta",hu:"a diéta / étrend",cat:"Egészség",ex:"Seguo una dieta mediterranea.",pron:"[la djeta]",hint:""},
+{it:"evitare",hu:"elkerülni / kerülni",cat:"Egészség",ex:"Evita lo zucchero raffinato.",pron:"[evitare]",hint:""},
+{it:"lo zucchero",hu:"a cukor",cat:"Egészség",ex:"Troppo zucchero fa male al corpo.",pron:"[lo dzukkero]",hint:""},
+{it:"le verdure",hu:"a zöldségek",cat:"Egészség",ex:"Mangio molte verdure fresche ogni giorno.",pron:"[le verdure]",hint:"Többes szám"},
+{it:"il pesce",hu:"a hal",cat:"Egészség",ex:"Il pesce fresco è molto sano.",pron:"[il pese]",hint:""},
+{it:"gli insaccati",hu:"a felvágottak / kolbászfélék",cat:"Egészség",ex:"Evita gli insaccati e preferisci il pesce.",pron:"[li inszakkati]",hint:"B2"},
+{it:"la visita medica",hu:"az orvosi vizsgálat",cat:"Egészség",ex:"La visita medica è importante ogni anno.",pron:"[la vizita medika]",hint:"Formális"},
+{it:"il benessere",hu:"a jólét / közérzet",cat:"Egészség",ex:"Il benessere fisico è fondamentale.",pron:"[il beneszszere]",hint:"B2"},
+{it:"la prevenzione",hu:"a megelőzés",cat:"Egészség",ex:"La prevenzione è meglio della cura.",pron:"[la preventszone]",hint:"B2"},
+{it:"il sistema immunitario",hu:"az immunrendszer",cat:"Egészség",ex:"Lo sport rafforza il sistema immunitario.",pron:"[il szisztema immunitarjo]",hint:"B2"},
+{it:"la pressione sanguigna",hu:"a vérnyomás",cat:"Egészség",ex:"Ha la pressione sanguigna alta.",pron:"[la preszszjone szangwinja]",hint:"B2"},
+{it:"il colesterolo",hu:"a koleszterin",cat:"Egészség",ex:"Devo controllare il colesterolo.",pron:"[il koleszterolo]",hint:"B2"},
+{it:"l'alimentazione",hu:"a táplálkozás",cat:"Egészség",ex:"Un'alimentazione sana è essenziale.",pron:"[l'alimentatszone]",hint:"B2"},
+{it:"i carboidrati",hu:"a szénhidrátok",cat:"Egészség",ex:"I carboidrati complessi danno energia.",pron:"[i karboidrati]",hint:"B2"},
+{it:"le proteine",hu:"a fehérjék",cat:"Egészség",ex:"Le proteine sono fondamentali per i muscoli.",pron:"[le protejne]",hint:"B2"},
+{it:"le calorie",hu:"a kalóriák",cat:"Egészség",ex:"Questo piatto ha troppe calorie.",pron:"[le kalorje]",hint:""},
+// SPORT
+{it:"allenarsi",hu:"edzeni / tréningezni",cat:"Sport",ex:"Mi alleno tre volte a settimana.",pron:"[allenarsi]",hint:"Visszaható ige"},
+{it:"la palestra",hu:"az edzőterem",cat:"Sport",ex:"Vado in palestra ogni mattina.",pron:"[la paleisztra]",hint:""},
+{it:"la corsa",hu:"a futás",cat:"Sport",ex:"Faccio una corsa nel parco ogni sera.",pron:"[la korsza]",hint:""},
+{it:"il nuoto",hu:"az úszás",cat:"Sport",ex:"Il nuoto è uno sport completo per il corpo.",pron:"[il nuoto]",hint:""},
+{it:"vincere",hu:"nyerni / győzni",cat:"Sport",ex:"La nostra squadra ha vinto la partita.",pron:"[vincere]",hint:""},
+{it:"perdere",hu:"veszíteni",cat:"Sport",ex:"Non importa perdere, conta partecipare.",pron:"[perdere]",hint:""},
+{it:"la squadra",hu:"a csapat",cat:"Sport",ex:"La nostra squadra è molto forte.",pron:"[la szkwadra]",hint:""},
+{it:"l'allenatore",hu:"az edző",cat:"Sport",ex:"L'allenatore prepara i giocatori.",pron:"[l'allenatore]",hint:""},
+{it:"il torneo",hu:"a torna / bajnokság",cat:"Sport",ex:"Partecipo a un torneo di tennis.",pron:"[il torneo]",hint:""},
+{it:"la gara",hu:"a verseny",cat:"Sport",ex:"Domani c'è una gara importante.",pron:"[la gara]",hint:""},
+// MUNKA
+{it:"il lavoro",hu:"a munka",cat:"Munka",ex:"Ho trovato un nuovo lavoro interessante.",pron:"[il lavoro]",hint:""},
+{it:"l'azienda",hu:"a vállalat / cég",cat:"Munka",ex:"Lavoro in un'azienda internazionale.",pron:"[l'atzjenda]",hint:""},
+{it:"il collega",hu:"a kolléga",cat:"Munka",ex:"I miei colleghi sono molto bravi.",pron:"[il kolleɡa]",hint:""},
+{it:"la riunione",hu:"az értekezlet",cat:"Munka",ex:"Ho una riunione importante alle dieci.",pron:"[la rjunjone]",hint:"B2"},
+{it:"il curriculum",hu:"az önéletrajz",cat:"Munka",ex:"Devo aggiornare il mio curriculum.",pron:"[il kurrikulum]",hint:""},
+{it:"assumere",hu:"felvenni (munkára)",cat:"Munka",ex:"L'azienda ha assunto nuovi dipendenti.",pron:"[aszszumere]",hint:"B2"},
+{it:"licenziarsi",hu:"felmondani",cat:"Munka",ex:"Si è licenziata dopo dieci anni.",pron:"[licentsjarsi]",hint:""},
+{it:"lo stipendio",hu:"a fizetés",cat:"Munka",ex:"Il suo stipendio è aumentato quest'anno.",pron:"[lo sztipendjo]",hint:""},
+{it:"il colloquio",hu:"az állásinterjú",cat:"Munka",ex:"Ho un colloquio di lavoro domani.",pron:"[il kollokwjo]",hint:"B2"},
+{it:"il telelavoro",hu:"a távmunka / home office",cat:"Munka",ex:"Il telelavoro è sempre più diffuso.",pron:"[il telelavoro]",hint:"B2"},
+{it:"la promozione",hu:"az előléptetés",cat:"Munka",ex:"Ha ricevuto una promozione meritata.",pron:"[la promotszone]",hint:"B2"},
+{it:"il contratto",hu:"a szerződés",cat:"Munka",ex:"Ho firmato un contratto a tempo indeterminato.",pron:"[il kontratto]",hint:""},
+// KÖRNYEZET
+{it:"l'ambiente",hu:"a környezet",cat:"Környezet",ex:"Dobbiamo proteggere l'ambiente naturale.",pron:"[l'ambjente]",hint:""},
+{it:"il clima",hu:"az éghajlat",cat:"Környezet",ex:"Il cambiamento climatico è urgente.",pron:"[il klima]",hint:""},
+{it:"inquinare",hu:"szennyezni",cat:"Környezet",ex:"Le fabbriche inquinano l'aria e l'acqua.",pron:"[inkwinare]",hint:""},
+{it:"riciclare",hu:"újrahasznosítani",cat:"Környezet",ex:"È importante riciclare i rifiuti ogni giorno.",pron:"[riciklare]",hint:""},
+{it:"le energie rinnovabili",hu:"a megújuló energia",cat:"Környezet",ex:"Le energie rinnovabili sono il futuro.",pron:"[le enerdzse rinnovabili]",hint:"B2"},
+{it:"la sostenibilità",hu:"a fenntarthatóság",cat:"Környezet",ex:"La sostenibilità è una priorità globale.",pron:"[la szosztenibilita]",hint:"B2"},
+{it:"salvaguardare",hu:"megóvni / megvédeni",cat:"Környezet",ex:"Dobbiamo salvaguardare le foreste tropicali.",pron:"[szalvaguardare]",hint:"B2 formális"},
+{it:"l'impronta ecologica",hu:"az ökológiai lábnyom",cat:"Környezet",ex:"Dobbiamo ridurre la nostra impronta ecologica.",pron:"[l'impronta ekolodzsika]",hint:"B2"},
+{it:"la deforestazione",hu:"az erdőirtás",cat:"Környezet",ex:"La deforestazione è un problema globale.",pron:"[la deforesztatszone]",hint:"B2"},
+{it:"le emissioni",hu:"a kibocsátások",cat:"Környezet",ex:"Bisogna ridurre le emissioni di CO2.",pron:"[le emiszszjoni]",hint:"B2"},
+// TÁRSADALOM
+{it:"la società",hu:"a társadalom",cat:"Társadalom",ex:"La società moderna è in continuo cambiamento.",pron:"[la szocsjeta]",hint:""},
+{it:"la tradizione",hu:"a hagyomány",cat:"Társadalom",ex:"Le tradizioni italiane sono molto ricche.",pron:"[la traditszone]",hint:""},
+{it:"integrare",hu:"integrálni",cat:"Társadalom",ex:"È difficile integrarsi in un nuovo paese.",pron:"[integrare]",hint:"B2"},
+{it:"la diversità",hu:"a sokféleség",cat:"Társadalom",ex:"La diversità culturale arricchisce la società.",pron:"[la diverzita]",hint:"B2"},
+{it:"il pregiudizio",hu:"az előítélet",cat:"Társadalom",ex:"Bisogna combattere i pregiudizi sociali.",pron:"[il predzsuditszo]",hint:"B2"},
+{it:"la parità",hu:"az egyenlőség",cat:"Társadalom",ex:"Lottare per la parità di genere è fondamentale.",pron:"[la parita]",hint:"B2"},
+{it:"il volontariato",hu:"az önkéntesség",cat:"Társadalom",ex:"Faccio volontariato ogni weekend.",pron:"[il volontarjato]",hint:"B2"},
+{it:"la solidarietà",hu:"a szolidaritás",cat:"Társadalom",ex:"La solidarietà è un valore fondamentale.",pron:"[la szolidarjeta]",hint:"B2"},
+// UTAZÁS
+{it:"il viaggio",hu:"az utazás",cat:"Utazás",ex:"Il viaggio è durato tre ore in totale.",pron:"[il vjaddzo]",hint:""},
+{it:"prenotare",hu:"lefoglalni",cat:"Utazás",ex:"Ho prenotato l'albergo online con anticipo.",pron:"[prenotare]",hint:""},
+{it:"la destinazione",hu:"az úticél",cat:"Utazás",ex:"La nostra destinazione finale è Venezia.",pron:"[la desztinatszone]",hint:""},
+{it:"il bagaglio",hu:"a poggyász",cat:"Utazás",ex:"Il mio bagaglio è troppo pesante.",pron:"[il bagalyo]",hint:""},
+{it:"l'itinerario",hu:"az útvonal",cat:"Utazás",ex:"Abbiamo pianificato l'itinerario in dettaglio.",pron:"[l'itinerario]",hint:"B2"},
+{it:"il soggiorno",hu:"a tartózkodás",cat:"Utazás",ex:"Il soggiorno a Roma è stato bellissimo.",pron:"[il szodzsorno]",hint:""},
+{it:"la guida turistica",hu:"az idegenvezető",cat:"Utazás",ex:"La guida turistica ci ha mostrato tutto.",pron:"[la gwida turisztika]",hint:""},
+{it:"l'escursione",hu:"a kirándulás",cat:"Utazás",ex:"Abbiamo fatto un'escursione in montagna.",pron:"[l'eszkurszjone]",hint:"B2"},
+// TECHNOLÓGIA
+{it:"la tecnologia",hu:"a technológia",cat:"Technológia",ex:"La tecnologia cambia rapidamente la nostra vita.",pron:"[la teknolodzsja]",hint:""},
+{it:"i social media",hu:"a közösségi média",cat:"Technológia",ex:"I social media influenzano l'opinione pubblica.",pron:"[i szosal media]",hint:""},
+{it:"la rete",hu:"a hálózat / internet",cat:"Technológia",ex:"Sono sempre connesso alla rete.",pron:"[la rete]",hint:""},
+{it:"l'intelligenza artificiale",hu:"a mesterséges intelligencia",cat:"Technológia",ex:"L'intelligenza artificiale è in rapida crescita.",pron:"[l'intellidsentsa artificsale]",hint:"B2"},
+{it:"sviluppare",hu:"fejleszteni",cat:"Technológia",ex:"L'azienda sviluppa nuove applicazioni mobili.",pron:"[szviluppare]",hint:"B2"},
+{it:"la privacy",hu:"az adatvédelem",cat:"Technológia",ex:"La privacy online è fondamentale oggi.",pron:"[la praivasi]",hint:""},
+{it:"il cyberbullismo",hu:"az online zaklatás",cat:"Technológia",ex:"Il cyberbullismo è un problema serio.",pron:"[il csiberbulizmo]",hint:"B2"},
+{it:"l'algoritmo",hu:"az algoritmus",cat:"Technológia",ex:"L'algoritmo decide cosa vediamo online.",pron:"[l'algorizmo]",hint:"B2"},
+// LAKÁS
+{it:"l'appartamento",hu:"a lakás",cat:"Lakás",ex:"Il mio appartamento è al terzo piano.",pron:"[l'appartamento]",hint:""},
+{it:"affittare",hu:"bérelni",cat:"Lakás",ex:"Voglio affittare un monolocale in centro.",pron:"[affittare]",hint:""},
+{it:"il quartiere",hu:"a negyed",cat:"Lakás",ex:"Abito in un quartiere molto tranquillo.",pron:"[il kvartsere]",hint:""},
+{it:"arredare",hu:"berendezni",cat:"Lakás",ex:"Dobbiamo arredare il salotto nuovo.",pron:"[arredare]",hint:"B2"},
+{it:"il condominio",hu:"a társasház",cat:"Lakás",ex:"Vivo in un condominio moderno.",pron:"[il kondominjo]",hint:"B2"},
+{it:"le spese condominiali",hu:"a közös költség",cat:"Lakás",ex:"Le spese condominiali sono aumentate molto.",pron:"[le szpeze kondominiali]",hint:"B2"},
+{it:"il mutuo",hu:"a jelzáloghitel",cat:"Lakás",ex:"Abbiamo preso un mutuo per comprare casa.",pron:"[il mutuo]",hint:"B2"},
+{it:"ristrutturare",hu:"felújítani",cat:"Lakás",ex:"Vogliamo ristrutturare il bagno.",pron:"[risztruttturare]",hint:"B2"},
+// ÉRZELMEK
+{it:"l'emozione",hu:"az érzelem",cat:"Érzelmek",ex:"Le emozioni influenzano le nostre decisioni.",pron:"[l'emotszone]",hint:""},
+{it:"la fiducia",hu:"a bizalom",cat:"Érzelmek",ex:"La fiducia è la base di ogni relazione.",pron:"[la fiducsa]",hint:"B2"},
+{it:"il rimpianto",hu:"a megbánás",cat:"Érzelmek",ex:"Vivo senza rimpianti nel cuore.",pron:"[il rimpianto]",hint:"B2"},
+{it:"la nostalgia",hu:"a nosztalgia",cat:"Érzelmek",ex:"Sento nostalgia per la mia città natale.",pron:"[la nosztaldzsa]",hint:""},
+{it:"superare",hu:"leküzdeni / túljutni",cat:"Érzelmek",ex:"Ha superato un momento molto difficile.",pron:"[szuperare]",hint:"B2"},
+{it:"condividere",hu:"megosztani",cat:"Érzelmek",ex:"È importante condividere i propri sentimenti.",pron:"[kondividere]",hint:"B2"},
+{it:"il sostegno",hu:"a támogatás",cat:"Érzelmek",ex:"Hai bisogno del sostegno degli amici cari.",pron:"[il szosztenyo]",hint:"B2"},
+{it:"la consapevolezza",hu:"a tudatosság",cat:"Érzelmek",ex:"La consapevolezza è fondamentale nella vita.",pron:"[la konszapevoletsza]",hint:"B2"},
+{it:"elaborare",hu:"feldolgozni (érzelmileg)",cat:"Érzelmek",ex:"Ci vuole tempo per elaborare un lutto.",pron:"[elaborare]",hint:"B2"},
+{it:"la resilienza",hu:"a reziliencia / lelki erő",cat:"Érzelmek",ex:"La resilienza aiuta a superare le difficoltà.",pron:"[la reziljentsa]",hint:"B2"},
+];
+
+// ══════════════════════════════════════════════════
+// KOLLOKÁCIÓK
+// ══════════════════════════════════════════════════
+const COLLOCATIONS=[
+{word:"mangiare",tr:"enni",items:[
+  {it:"mangiare sano",hu:"egészségesen enni",ex:"Cerco di mangiare sano ogni giorno."},
+  {it:"mangiare fuori",hu:"étteremben / kinn enni",ex:"Stasera mangiamo fuori con gli amici."},
+  {it:"mangiare in fretta",hu:"gyorsan enni",ex:"Non mangiare in fretta, fa male!"},
+  {it:"mangiare a sazietà",hu:"jóllakni",ex:"Mangia a sazietà, non stressarti."},
+]},
+{word:"fare",tr:"csinálni / tenni",items:[
+  {it:"fare sport",hu:"sportolni",ex:"Faccio sport tre volte a settimana."},
+  {it:"fare una passeggiata",hu:"sétálni",ex:"Facciamo una passeggiata nel parco?"},
+  {it:"fare carriera",hu:"karriert csinálni",ex:"Vuole fare carriera nel marketing."},
+  {it:"fare una domanda",hu:"kérdést feltenni",ex:"Posso fare una domanda?"},
+  {it:"fare del bene",hu:"jót tenni",ex:"Il volontariato ti fa fare del bene."},
+]},
+{word:"avere",tr:"bírni / rendelkezni",items:[
+  {it:"avere voglia di",hu:"kedve lenni valamihez",ex:"Ho voglia di mangiare la pizza stasera."},
+  {it:"avere bisogno di",hu:"szüksége lenni valamire",ex:"Ho bisogno del tuo aiuto oggi."},
+  {it:"avere fretta",hu:"sietni",ex:"Scusa, ho fretta!"},
+  {it:"avere paura",hu:"félni",ex:"Ho paura dei ragni."},
+  {it:"avere ragione",hu:"igazat mondani",ex:"Hai ragione, mi dispiace."},
+]},
+{word:"prendere",tr:"venni / inni / szedni",items:[
+  {it:"prendere una decisione",hu:"döntést hozni",ex:"Ho preso una decisione difficile."},
+  {it:"prendere un caffè",hu:"kávét inni",ex:"Prendiamo un caffè insieme?"},
+  {it:"prendere il treno",hu:"vonatra szállni",ex:"Prendo il treno ogni mattina."},
+  {it:"prendere in giro",hu:"ugratni / bolonddá tenni",ex:"Smettila di prendermi in giro!"},
+]},
+{word:"dare",tr:"adni",items:[
+  {it:"dare per scontato",hu:"magától értetődőnek venni",ex:"Non dare nulla per scontato nella vita."},
+  {it:"dare fastidio",hu:"zavarni / bosszantani",ex:"Il rumore mi dà fastidio."},
+  {it:"dare una mano",hu:"segíteni",ex:"Mi dai una mano con questo?"},
+  {it:"dare ragione",hu:"igazat adni",ex:"Ti do ragione su questo punto."},
+]},
+{word:"tenere",tr:"tartani / megtartani",items:[
+  {it:"tenere in mente",hu:"észben tartani",ex:"Tieni in mente questa regola importante."},
+  {it:"tenere compagnia",hu:"társaságot tartani",ex:"Mi tieni compagnia stasera?"},
+  {it:"tenere conto di",hu:"figyelembe venni",ex:"Devi tenere conto delle spese."},
+]},
+];
+
+// ══════════════════════════════════════════════════
+// FORDÍTÁS ADATOK
+// ══════════════════════════════════════════════════
+const FORDITAS_DATA={
+"Egészség":[
+  {hu:"Kerüld a cukrot és egyél több zöldséget.",correct:"Evita lo zucchero e mangia più verdure."},
+  {hu:"Az orvos azt mondta, hogy sportolnom kell.",correct:"Il medico ha detto che devo fare sport."},
+  {hu:"Az egészséges életmód nagyon fontos számomra.",correct:"Lo stile di vita sano è molto importante per me."},
+  {hu:"Hetente háromszor edzek az edzőteremben.",correct:"Mi alleno in palestra tre volte a settimana."},
+  {hu:"A felvágottak helyett inkább friss halat egyél.",correct:"Invece degli insaccati, preferisci il pesce fresco."},
+  {hu:"A megelőzés fontosabb, mint a gyógyítás.",correct:"La prevenzione è più importante della cura."},
+  {hu:"A rossz táplálkozás növeli a koleszterin szintjét.",correct:"Una cattiva alimentazione aumenta il livello di colesterolo."},
+],
+"Munka":[
+  {hu:"Holnap állásinterjúm van egy nagy vállalatnál.",correct:"Domani ho un colloquio di lavoro in una grande azienda."},
+  {hu:"Frissíteni kell az önéletrajzomat.",correct:"Devo aggiornare il mio curriculum."},
+  {hu:"A fizetésem az elmúlt évben emelkedett.",correct:"Il mio stipendio è aumentato nell'ultimo anno."},
+  {hu:"A kollégáim nagyon segítőkészek.",correct:"I miei colleghi sono molto disponibili."},
+  {hu:"Tíz év után felmondott az állásából.",correct:"Si è licenziato dal suo lavoro dopo dieci anni."},
+  {hu:"A remote munka egyre elterjedtebb.",correct:"Il telelavoro è sempre più diffuso."},
+  {hu:"Határozatlan idejű szerződést írtam alá.",correct:"Ho firmato un contratto a tempo indeterminato."},
+],
+"Környezet":[
+  {hu:"Meg kell védenünk a környezetet a jövő generációknak.",correct:"Dobbiamo proteggere l'ambiente per le generazioni future."},
+  {hu:"A megújuló energiák a jövő energiái.",correct:"Le energie rinnovabili sono le energie del futuro."},
+  {hu:"Fontos az újrahasznosítás a mindennapokban.",correct:"È importante riciclare nella vita quotidiana."},
+  {hu:"A fenntarthatóság globális prioritás.",correct:"La sostenibilità è una priorità globale."},
+  {hu:"Csökkenteni kell a CO2 kibocsátást.",correct:"Bisogna ridurre le emissioni di CO2."},
+  {hu:"Az erdőirtás globális probléma.",correct:"La deforestazione è un problema globale."},
+  {hu:"Csökkenteni kell az ökológiai lábnyomunkat.",correct:"Dobbiamo ridurre la nostra impronta ecologica."},
+],
+"Társadalom":[
+  {hu:"A kulturális sokféleség gazdagítja a társadalmat.",correct:"La diversità culturale arricchisce la società."},
+  {hu:"Harcolni kell az előítéletek ellen.",correct:"Bisogna combattere i pregiudizi."},
+  {hu:"A nemek közötti egyenlőség fontos cél.",correct:"La parità di genere è un obiettivo importante."},
+  {hu:"Nehéz beilleszkedni egy új országba.",correct:"È difficile integrarsi in un nuovo paese."},
+  {hu:"A szolidaritás alapvető érték.",correct:"La solidarietà è un valore fondamentale."},
+],
+"Utazás":[
+  {hu:"Lefoglaltam a szállodát az interneten.",correct:"Ho prenotato l'albergo su internet."},
+  {hu:"A poggyászom túl nehéz volt a repülőn.",correct:"Il mio bagaglio era troppo pesante in aereo."},
+  {hu:"A római tartózkodás csodálatos volt.",correct:"Il soggiorno a Roma è stato meraviglioso."},
+  {hu:"Tervezzük meg az útvonalat előre.",correct:"Pianifichiamo l'itinerario in anticipo."},
+  {hu:"Kirándulást tettünk a hegyekben.",correct:"Abbiamo fatto un'escursione in montagna."},
+],
+"Technológia":[
+  {hu:"A mesterséges intelligencia megváltoztatja az életünket.",correct:"L'intelligenza artificiale cambia la nostra vita."},
+  {hu:"Az online adatvédelem nagyon fontos manapság.",correct:"La privacy online è molto importante al giorno d'oggi."},
+  {hu:"A közösségi média befolyásolja a közvéleményt.",correct:"I social media influenzano l'opinione pubblica."},
+  {hu:"Az algoritmus dönti el, mit látunk az interneten.",correct:"L'algoritmo decide cosa vediamo online."},
+  {hu:"Az online zaklatás komoly probléma.",correct:"Il cyberbullismo è un problema serio."},
+],
+"Lakás":[
+  {hu:"Egy modern társasházban lakom.",correct:"Vivo in un condominio moderno."},
+  {hu:"Egyszobás lakást szeretnék bérelni.",correct:"Voglio affittare un monolocale."},
+  {hu:"A közös költség az elmúlt évben emelkedett.",correct:"Le spese condominiali sono aumentate nell'ultimo anno."},
+  {hu:"Jelzáloghitelt vettünk fel a lakáshoz.",correct:"Abbiamo preso un mutuo per comprare casa."},
+  {hu:"Fel szeretnénk újítani a fürdőszobát.",correct:"Vogliamo ristrutturare il bagno."},
+],
+"Érzelmek":[
+  {hu:"A bizalom minden kapcsolat alapja.",correct:"La fiducia è la base di ogni relazione."},
+  {hu:"Fontos megosztani az érzéseinket.",correct:"È importante condividere i propri sentimenti."},
+  {hu:"A lelki erő segít leküzdeni a nehézségeket.",correct:"La resilienza aiuta a superare le difficoltà."},
+  {hu:"Időbe telik feldolgozni egy veszteséget.",correct:"Ci vuole tempo per elaborare un lutto."},
+  {hu:"A tudatosság alapvető a mindennapi életben.",correct:"La consapevolezza è fondamentale nella vita quotidiana."},
+],
+};
+
+// ══════════════════════════════════════════════════
+// MONDATALKOTÁS ADATOK
+// ══════════════════════════════════════════════════
+const MONDAT_DATA={
+"Egészség":[
+  {word:"evitare",tr:"elkerülni",colloc:"evitare lo zucchero / evitare i cibi grassi",hint:"Írj egy mondatot arról, mit kerülsz el az étrendedből!"},
+  {word:"il benessere",tr:"a jólét / közérzet",colloc:"il benessere fisico / il benessere mentale",hint:"Miért fontos a benessere számodra?"},
+  {word:"l'alimentazione",tr:"a táplálkozás",colloc:"un'alimentazione sana / l'alimentazione quotidiana",hint:"Írd le az étrendedet egy mondatban!"},
+  {word:"la prevenzione",tr:"a megelőzés",colloc:"la prevenzione è fondamentale / fare prevenzione",hint:"Miért fontos a prevenzione?"},
+  {word:"allenarsi",tr:"edzeni",colloc:"allenarsi regolarmente / allenarsi in palestra",hint:"Mikor és hol edzel?"},
+],
+"Munka":[
+  {word:"il colloquio",tr:"az állásinterjú",colloc:"fare un colloquio / superare il colloquio",hint:"Írj egy mondatot egy képzeletbeli állásinterjúról!"},
+  {word:"il telelavoro",tr:"a távmunka",colloc:"lavorare in telelavoro / preferire il telelavoro",hint:"Szerinted jobb a telelavoro vagy az ufficio?"},
+  {word:"assumere",tr:"felvenni (munkára)",colloc:"essere assunto / assumere personale",hint:"Milyen cégnél szeretnél essere assunto?"},
+  {word:"la promozione",tr:"az előléptetés",colloc:"ricevere una promozione / meritare la promozione",hint:"Mit kellene tenni a promozione-ért?"},
+],
+"Környezet":[
+  {word:"riciclare",tr:"újrahasznosítani",colloc:"riciclare la carta / riciclare il vetro",hint:"Hogyan riciclálsz otthon?"},
+  {word:"la sostenibilità",tr:"a fenntarthatóság",colloc:"promuovere la sostenibilità / vivere in modo sostenibile",hint:"Mit teszel a sostenibilità érdekében?"},
+  {word:"l'impronta ecologica",tr:"az ökológiai lábnyom",colloc:"ridurre l'impronta ecologica / calcolare l'impronta",hint:"Hogyan csökkented az impronta ecologica-t?"},
+],
+"Érzelmek":[
+  {word:"la fiducia",tr:"a bizalom",colloc:"avere fiducia in / perdere la fiducia",hint:"Kiben vagy miben bízol a legjobban?"},
+  {word:"superare",tr:"leküzdeni",colloc:"superare le difficoltà / superare un esame",hint:"Milyen nehézséget küzdöttél le?"},
+  {word:"la resilienza",tr:"a lelki erő",colloc:"dimostrare resilienza / sviluppare la resilienza",hint:"Miért fontos a resilienza?"},
+],
+};
+
+// ══════════════════════════════════════════════════
+// HETI TERV
+// ══════════════════════════════════════════════════
+const PLAN=[
+  {week:1,theme:"Egészség & táplálkozás",days:["Bevezető: 20 szó tanulása flashkártyával","Olvasd el: olasz étlap / receptek","Fordítás: 5 mondat magyarból olaszra","Kvíz + speed round","Mondatalkotás: 3 egészség szóval","Coffee Break Italian podcast ep.1","Heti összefoglalás + hibajegyzék"]},
+  {week:2,theme:"Egészség — írásbeli mélység",days:["Kollokációk: mangiare, fare, avere","Fordítás: nehezebb egészséges mondatok","PLIDA-írás: 100 szó — az egészséges életmódod","Kvíz: ismétlés + új szavak","AI párbeszéd: descrivi la tua dieta","Speed round: egészség témakör","Önértékelés: mit tudok, mit nem?"]},
+  {week:3,theme:"Sport & mozgás",days:["Sport szókincs: 20 új szó","Fordítás: sportos mondatok","Mondatalkotás: allenarsi, vincere, perdere","Kvíz","AI párbeszéd: il tuo sport preferito","Speed round","Heti teszt: 10 mondat sportról"]},
+  {week:4,theme:"Munka & karrier I.",days:["Munka szókincs: 20 szó","Fordítás: önéletrajz-mondatok","Írj formális emailt állásra","Kvíz","Mondatalkotás: colloquio, contratto","Speed round","Ismétlés + heti teszt"]},
+  {week:5,theme:"Munka — formális írás",days:["Formális levélírás olaszul","Fordítás: üzleti mondatok","PLIDA-írás: 160 szó — home office pro/kontra","Kvíz","AI: parlami del tuo lavoro ideale","Speed round","Heti összefoglalás"]},
+  {week:6,theme:"Tanulás & oktatás",days:["Iskolai szókincs: 20 szó","Fordítás: oktatási mondatok","Írás: az oktatás jövője (120 szó)","Kvíz","AI: descrivi il tuo percorso scolastico","Speed round","Heti teszt"]},
+  {week:7,theme:"Környezet & természet",days:["Ökológiai szókincs: 20 szó","Fordítás: környezetvédelmi mondatok","PLIDA-írás: Mit tehetsz a környezetért? (160 szó)","Kvíz","AI: il cambiamento climatico","Speed round","Heti ismétlés"]},
+  {week:8,theme:"Környezet — érvelés",days:["Pro-kontra: fenntarthatóság","Fordítás: komplex érvelő mondatok","Érvelő szöveg (180 szó)","Kvíz","AI: argomenti pro energia rinnovabile","Speed round","Heti teszt"]},
+  {week:9,theme:"Fenntarthatóság összefoglalás",days:["Ismétlés: 7-8. hét szavai","Komplex fordítás","200 szavas szöveg","Kvíz: kombinált","AI: debate — sostenibilità","Speed record kísérlet","Önértékelés"]},
+  {week:10,theme:"Társadalom & kultúra",days:["Szókincs: diversità, parità...","Fordítás: társadalmi mondatok","Írás: a mai olasz társadalom (150 szó)","Kvíz","AI: la parità di genere in Italia","Speed round","Heti teszt"]},
+  {week:11,theme:"Kultúra & hagyományok",days:["Tradíció szókincs","Fordítás: kulturális mondatok","PLIDA-írás: egy olasz hagyomány (150 szó)","Kvíz","AI: le tradizioni della tua famiglia","Speed round","Heti összefoglalás"]},
+  {week:12,theme:"Társadalom összefoglalás",days:["Ismétlés: 10-11. hét","Komplex fordítás","Érvelő szöveg: integráció (200 szó)","Kvíz: kombinált","AI: il volontariato","Speed record","Heti teszt"]},
+  {week:13,theme:"Utazás & turizmus",days:["Utazás szókincs: 20 szó","Fordítás: utazós mondatok","Írás: tervezett utazás (160 szó)","Kvíz","AI: descrivi il tuo viaggio preferito","Speed round","Heti ismétlés"]},
+  {week:14,theme:"Utazás — szóbeli szimulációk",days:["Repülőtér / szálloda párbeszédek","Fordítás: panasz és reklamáció","Trip Advisor értékelés (160 szó)","Kvíz","AI: prenota una camera d'albergo","Speed round","Heti teszt"]},
+  {week:15,theme:"Utazás összefoglalás",days:["Ismétlés + komplex fordítás","Utazási blog bejegyzés (200 szó)","Kvíz: kombinált","AI: consigli di viaggio in Italia","Speed record","3 perces prezentáció egy városról","Önértékelés"]},
+  {week:16,theme:"Technológia & média",days:["Tech szókincs: 20 szó","Fordítás: technológiai mondatok","Írás: közösségi média hatása (150 szó)","Kvíz","AI: l'intelligenza artificiale","Speed round","Heti teszt"]},
+  {week:17,theme:"Média & kommunikáció",days:["Média szókincs","Fordítás: médiás mondatok","PLIDA-írás: az újságírás jövője (180 szó)","Kvíz","AI: i social media nella tua vita","Speed round","Heti összefoglalás"]},
+  {week:18,theme:"Technológia összefoglalás",days:["Ismétlés: 16-17. hét","Komplex fordítás","Digitális világ pro/kontra (200 szó)","Kvíz: kombinált","AI: il cyberbullismo","Speed record","Heti teszt"]},
+  {week:19,theme:"Lakás & mindennapi élet",days:["Lakás szókincs: 20 szó","Fordítás: lakásos mondatok","Lakáskeresési hirdetés (130 szó)","Kvíz","AI: descrivi la tua casa","Speed round","Heti ismétlés"]},
+  {week:20,theme:"Mindennapi rutin",days:["Napi rutin szókincs","Fordítás: hétköznapos mondatok","Egy napom Olaszországban (180 szó)","Kvíz","AI: la tua routine quotidiana","Speed round","Heti teszt"]},
+  {week:21,theme:"Lakás összefoglalás",days:["Ismétlés + komplex fordítás","Levél a főbérlőhöz (formális, 160 szó)","Kvíz: kombinált","AI: problemi nel condominio","Speed record","Lakáskereső szituáció","Önértékelés"]},
+  {week:22,theme:"Érzelmek & kapcsolatok",days:["Érzelem szókincs: 20 szó","Fordítás: érzelmes mondatok","Egy barátság leírása (150 szó)","Kvíz","AI: come gestisci le emozioni?","Speed round","Heti teszt"]},
+  {week:23,theme:"Kapcsolatok & vélemény",days:["Véleményalkotás: amore, famiglia...","Fordítás: komplex érzelmi mondatok","PLIDA-írás: mi a boldogság? (200 szó)","Kvíz","AI: la resilienza nella tua vita","Speed round","Heti összefoglalás"]},
+  {week:24,theme:"🇮🇹 Teljes PLIDA B2 szimuláció",days:["Teljes szókincs ismétlés (összes kategória)","Mock reading test: olasz szöveg + kérdések","Mock writing: 200 szavas érvelő szöveg","Mock listening: podcast + feladatok","Mock speaking: 3 perces monológ","Hibaelemzés + utolsó ismétlés","Pihengj — Buona fortuna! 🎉"]},
+];
+
+// ══════════════════════════════════════════════════
+// AI CHAT TÉMÁK
+// ══════════════════════════════════════════════════
+const CHAT_TOPICS={
+  "Egészség 🍎":{
+    system:`Sei un professore d'italiano che aiuta studenti ungheresi a prepararsi per l'esame PLIDA B2. L'argomento è salute e alimentazione. Rispondi sempre in italiano (massimo 4-5 frasi). Dopo ogni risposta, correggi gentilmente gli errori grammaticali dello studente in una sezione separata marcata con "📝 Correzione:". Usa vocabolario B2 appropriato.`,
+    suggestions:["Descrivi la tua dieta quotidiana.","Cosa fai per mantenerti in forma?","Qual è la tua opinione sulla dieta mediterranea?","Come si può prevenire le malattie?"]
+  },
+  "Munka 💼":{
+    system:`Sei un professore d'italiano che aiuta studenti ungheresi a prepararsi per l'esame PLIDA B2. L'argomento è lavoro e carriera. Rispondi sempre in italiano (massimo 4-5 frasi). Dopo ogni risposta, correggi gentilmente gli errori grammaticali dello studente in una sezione separata marcata con "📝 Correzione:". Usa vocabolario B2 appropriato.`,
+    suggestions:["Descrivi il tuo lavoro ideale.","Quali sono i vantaggi del telelavoro?","Come ti prepari per un colloquio?","È meglio lavorare in un'azienda grande o piccola?"]
+  },
+  "Ambiente 🌿":{
+    system:`Sei un professore d'italiano che aiuta studenti ungheresi a prepararsi per l'esame PLIDA B2. L'argomento è ambiente e sostenibilità. Rispondi sempre in italiano (massimo 4-5 frasi). Dopo ogni risposta, correggi gentilmente gli errori grammaticali dello studente in una sezione separata marcata con "📝 Correzione:". Usa vocabolario B2 appropriato.`,
+    suggestions:["Cosa fai per proteggere l'ambiente?","Qual è la tua opinione sulle energie rinnovabili?","Come si può ridurre l'impronta ecologica?","Il cambiamento climatico ti preoccupa?"]
+  },
+  "Vita quotidiana 🏠":{
+    system:`Sei un professore d'italiano che aiuta studenti ungheresi a prepararsi per l'esame PLIDA B2. L'argomento è vita quotidiana. Rispondi sempre in italiano (massimo 4-5 frasi). Dopo ogni risposta, correggi gentilmente gli errori grammaticali dello studente in una sezione separata marcata con "📝 Correzione:". Usa vocabolario B2 appropriato.`,
+    suggestions:["Descrivi la tua giornata tipica.","Come passi il tempo libero?","Descrivi la tua casa.","Cosa ti piace fare nel weekend?"]
+  },
+  "Opinioni 💭":{
+    system:`Sei un professore d'italiano che aiuta studenti ungheresi a prepararsi per l'esame PLIDA B2. Discuti di argomenti di attualità. Rispondi sempre in italiano (massimo 4-5 frasi). Dopo ogni risposta, correggi gentilmente gli errori grammaticali dello studente in una sezione separata marcata con "📝 Correzione:". Usa vocabolario B2 appropriato e fai domande per stimolare la conversazione.`,
+    suggestions:["Qual è la tua opinione sui social media?","Come vedi il futuro dell'intelligenza artificiale?","È importante il volontariato nella società?","La parità di genere è ancora un problema?"]
+  },
+};
+
+// ══════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════
+let S=(()=>{
+  try{const s=localStorage.getItem('plida_b2_v3');if(s)return JSON.parse(s);}catch(e){}
+  const t=ds(new Date());
+  return{cards:WORDS.map((_,i)=>({id:i,interval:1,ease:2.5,due:t,reps:0,lapses:0,level:'new'})),sessions:0,streak:0,lastStudy:null,streakDays:[],quizScores:[],version:3};
+})();
+
+function save(){try{localStorage.setItem('plida_b2_v3',JSON.stringify(S));}catch(e){}}
+function ds(d){return d.toISOString().split('T')[0];}
+function today(){return ds(new Date());}
+function getDue(){const t=today();return S.cards.filter(c=>c.due<=t);}
+function getWord(c){return WORDS[c.id];}
+const CATEGORIES=[...new Set(WORDS.map(w=>w.cat))];
+
+// ══════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════
+const SCREENS=['flashcards','quiz','speed','mondat','forditas','chat','kollokacio','szotar','terv','progress'];
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  const idx=SCREENS.indexOf(name);
+  if(idx>=0) document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+  if(name==='progress')renderProgress();
+  if(name==='szotar')renderSzotar();
+  if(name==='forditas')renderForditas();
+  if(name==='terv')renderTerv();
+  if(name==='kollokacio')renderKollokacio();
+  if(name==='mondat')renderMondat();
+  if(name==='chat')renderChat();
+  updateSidebarStreak();
+  if(window.innerWidth<=768)document.getElementById('sidebar').classList.remove('open');
+}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');}
+function updateSidebarStreak(){document.getElementById('sb-streak').textContent=S.streak;}
+
+// ══════════════════════════════════════════════════
+// FLASHCARDS
+// ══════════════════════════════════════════════════
+let fcCards=[],fcIdx=0,fcFlipped=false,fcRatings={1:0,2:0,3:0,4:0};
+function initFCStart(){
+  const due=getDue();
+  document.getElementById('fc-due-count').textContent=due.length;
+  document.getElementById('fc-total').textContent=WORDS.length;
+  document.getElementById('fc-known').textContent=S.cards.filter(c=>c.level==='known').length;
+  document.getElementById('fc-sessions').textContent=S.sessions;
+  document.getElementById('fc-start-title').textContent=due.length>0?`${due.length} kártya vár rád`:`Nincs esedékes kártya 🎉`;
+  document.getElementById('fc-start-desc').textContent=due.length>0?`Az esedékes kártyák ismétlésével megerősítsd a memóriádat.`:`Minden naprakész! Folytathatod a tanulást.`;
+  const dl=document.getElementById('due-list');
+  const show=due.slice(0,6);
+  const lvMap={new:'lv-new',learning:'lv-learning',review:'lv-review',known:'lv-known'};
+  const lvLbl={new:'Új',learning:'Tanul',review:'Ismétlés',known:'Tudja'};
+  dl.innerHTML=show.map(c=>{const w=getWord(c);return`<div class="due-item"><div class="di-word">${w.it}</div><div class="di-tr">${w.hu}</div><span class="di-lv ${lvMap[c.level]||'lv-new'}">${lvLbl[c.level]||'Új'}</span></div>`;}).join('')+(due.length>6?`<div style="font-size:0.75rem;color:var(--ink3);padding:8px 0">...és még ${due.length-6} kártya</div>`:'');
+}
+function startFlashcards(){
+  let due=getDue();if(due.length===0)due=S.cards.slice(0,20);
+  fcCards=due.slice(0,20);fcIdx=0;fcFlipped=false;fcRatings={1:0,2:0,3:0,4:0};
+  document.getElementById('fc-start').style.display='none';
+  document.getElementById('fc-study').style.display='block';
+  document.getElementById('fc-done').style.display='none';
+  showFC();
+}
+function showFC(){
+  if(fcIdx>=fcCards.length){endSession();return;}
+  const w=getWord(fcCards[fcIdx]);
+  fcFlipped=false;
+  document.getElementById('fc-inner').classList.remove('flipped');
+  document.getElementById('fc-it').textContent=w.it;
+  document.getElementById('fc-hu').textContent=w.hu;
+  document.getElementById('fc-cat').textContent=w.cat;
+  document.getElementById('fc-hint').textContent=w.hint||'';
+  document.getElementById('fc-pron').textContent=w.pron||'';
+  document.getElementById('fc-ex').textContent=w.ex||'';
+  document.getElementById('fc-counter').textContent=(fcIdx+1)+' / '+fcCards.length;
+  document.getElementById('fc-prog').style.width=((fcIdx/fcCards.length)*100)+'%';
+  document.getElementById('rating-grid').classList.add('rate-locked');
+}
+function flipCard(){
+  fcFlipped=!fcFlipped;
+  document.getElementById('fc-inner').classList.toggle('flipped',fcFlipped);
+  if(fcFlipped)document.getElementById('rating-grid').classList.remove('rate-locked');
+}
+function rateCard(r){
+  fcRatings[r]++;
+  const c=fcCards[fcIdx];
+  if(r===1){c.interval=1;c.ease=Math.max(1.3,c.ease-0.2);c.lapses++;c.level='learning';}
+  else if(r===2){c.interval=Math.max(1,Math.floor(c.interval*1.2));c.ease=Math.max(1.3,c.ease-0.15);c.level='learning';}
+  else if(r===3){c.interval=Math.floor(c.interval*c.ease*0.85);c.level='review';}
+  else{c.interval=Math.floor(c.interval*c.ease);c.ease+=0.1;c.level=c.interval>14?'known':'review';}
+  c.reps++;const d=new Date();d.setDate(d.getDate()+c.interval);c.due=ds(d);
+  fcIdx++;showFC();save();
+}
+function skipCard(){fcIdx++;showFC();}
+function endSession(){
+  const t=today();
+  if(S.lastStudy!==t){S.sessions++;if(!S.streakDays.includes(t))S.streakDays.push(t);const yd=new Date();yd.setDate(yd.getDate()-1);if(S.lastStudy===ds(yd)||S.streak===0)S.streak++;else if(S.lastStudy!==t)S.streak=1;S.lastStudy=t;}
+  save();
+  document.getElementById('fc-study').style.display='none';
+  document.getElementById('fc-done').style.display='block';
+  document.getElementById('fc-done-msg').textContent=`Streak: ${S.streak} nap 🔥 — Continuate così!`;
+  const ok=fcRatings[3]+fcRatings[4],nok=fcRatings[1]+fcRatings[2];
+  document.getElementById('fc-done-pills').innerHTML=`<div class="done-pill"><strong>${fcIdx}</strong><span>Kártya</span></div><div class="done-pill"><strong>${ok}</strong><span>Tudtad</span></div><div class="done-pill"><strong>${nok}</strong><span>Nem tudtad</span></div><div class="done-pill"><strong>${S.streak}</strong><span>Nap streak</span></div>`;
+  updateSidebarStreak();
+}
+function resetFC(){
+  document.getElementById('fc-start').style.display='block';
+  document.getElementById('fc-study').style.display='none';
+  document.getElementById('fc-done').style.display='none';
+  initFCStart();
+}
+
+// ══════════════════════════════════════════════════
+// KVÍZ
+// ══════════════════════════════════════════════════
+let qzQs=[],qzIdx=0,qzScore=0,qzAnswered=false;
+function startQuiz(){
+  qzQs=[...WORDS].sort(()=>Math.random()-0.5).slice(0,10);
+  qzIdx=0;qzScore=0;qzAnswered=false;
+  document.getElementById('qz-start').style.display='none';
+  document.getElementById('qz-game').style.display='block';
+  document.getElementById('qz-done').style.display='none';
+  showQ();
+}
+function showQ(){
+  if(qzIdx>=qzQs.length){endQuiz();return;}
+  const w=qzQs[qzIdx];qzAnswered=false;
+  document.getElementById('qz-word').textContent=w.hu;
+  document.getElementById('qz-cat').textContent=w.cat;
+  document.getElementById('qz-prog').style.width=((qzIdx/qzQs.length)*100)+'%';
+  document.getElementById('qz-num').textContent=(qzIdx+1)+'/'+qzQs.length;
+  document.getElementById('qz-fb').className='q-fb';
+  document.getElementById('qz-next').style.display='none';
+  const wrongs=[...WORDS].filter(x=>x.it!==w.it).sort(()=>Math.random()-0.5).slice(0,3);
+  const choices=[w,...wrongs].sort(()=>Math.random()-0.5);
+  document.getElementById('qz-opts').innerHTML=choices.map((c,i)=>`<button class="q-opt" id="qo${i}" onclick="answerQ(${i},'${c.it.replace(/'/g,"\\'")}','${w.it.replace(/'/g,"\\'")}')">${c.it}</button>`).join('');
+}
+function answerQ(idx,chosen,correct){
+  if(qzAnswered)return;qzAnswered=true;
+  document.querySelectorAll('.q-opt').forEach(b=>b.classList.add('ql'));
+  const fb=document.getElementById('qz-fb');
+  if(chosen===correct){qzScore++;document.getElementById('qo'+idx).classList.add('correct');fb.className='q-fb ok show';fb.textContent='✓ Helyes! '+(WORDS.find(w=>w.it===correct)?.pron||'');}
+  else{document.getElementById('qo'+idx).classList.add('wrong');document.querySelectorAll('.q-opt').forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});fb.className='q-fb nok show';fb.textContent='✗ Helyes: '+correct+' — '+(WORDS.find(w=>w.it===correct)?.hu||'');}
+  document.getElementById('qz-next').style.display='block';
+}
+function nextQuiz(){qzIdx++;showQ();}
+function endQuiz(){
+  const pct=Math.round((qzScore/qzQs.length)*100);
+  document.getElementById('qz-game').style.display='none';
+  document.getElementById('qz-done').style.display='block';
+  document.getElementById('qz-icon').textContent=pct>=80?'🏆':pct>=60?'😊':'📚';
+  document.getElementById('qz-title').textContent=pct>=80?'Eccellente!':pct>=60?'Molto bene!':'Continua a studiare!';
+  document.getElementById('qz-msg').textContent=`${pct}% helyes — ${qzScore}/${qzQs.length} kérdés`;
+  document.getElementById('qz-pills').innerHTML=`<div class="done-pill"><strong>${qzScore}</strong><span>Helyes</span></div><div class="done-pill"><strong>${qzQs.length-qzScore}</strong><span>Hibás</span></div><div class="done-pill"><strong>${pct}%</strong><span>Eredmény</span></div>`;
+  S.quizScores.push({date:today(),score:pct});save();
+}
+function resetQuiz(){document.getElementById('qz-start').style.display='block';document.getElementById('qz-game').style.display='none';document.getElementById('qz-done').style.display='none';}
+
+// ══════════════════════════════════════════════════
+// SPEED ROUND
+// ══════════════════════════════════════════════════
+let spTimer=null,spTime=60,spOk=0,spNok=0,spWords=[],spIdx=0;
+function startSpeed(){
+  spWords=[...WORDS].sort(()=>Math.random()-0.5);
+  spIdx=0;spOk=0;spNok=0;spTime=60;
+  document.getElementById('sp-start').style.display='none';
+  document.getElementById('sp-game').style.display='block';
+  document.getElementById('sp-done').style.display='none';
+  showSpWord();
+  spTimer=setInterval(()=>{
+    spTime--;
+    const el=document.getElementById('sp-time');
+    el.textContent=spTime;
+    el.className='time'+(spTime<=10?' danger':'');
+    if(spTime<=0){clearInterval(spTimer);endSpeed();}
+  },1000);
+  document.getElementById('sp-input').focus();
+}
+function showSpWord(){
+  if(spIdx>=spWords.length)spIdx=0;
+  const w=spWords[spIdx];
+  document.getElementById('sp-word').textContent=w.hu;
+  document.getElementById('sp-cat').textContent=w.cat;
+  document.getElementById('sp-input').value='';
+  document.getElementById('sp-input').className='speed-input';
+  document.getElementById('sp-ok').textContent=spOk;
+  document.getElementById('sp-nok').textContent=spNok;
+}
+function speedKey(e){
+  if(e.key==='Enter'){
+    const input=document.getElementById('sp-input').value.trim().toLowerCase();
+    const w=spWords[spIdx];
+    const correct=w.it.toLowerCase().replace(/^(il |la |lo |l'|i |gli |le )/,'');
+    const given=input.replace(/^(il |la |lo |l'|i |gli |le )/,'');
+    if(given===correct||input===w.it.toLowerCase()){
+      spOk++;
+      document.getElementById('sp-input').className='speed-input correct-anim';
+      document.getElementById('sp-last').textContent='✓ '+w.it+' = '+w.hu;
+      document.getElementById('sp-last').style.color='#4db880';
+    }else{
+      spNok++;
+      document.getElementById('sp-input').className='speed-input wrong-anim';
+      document.getElementById('sp-last').textContent='✗ Helyes: '+w.it;
+      document.getElementById('sp-last').style.color='#e07070';
+    }
+    spIdx++;
+    setTimeout(showSpWord,300);
+  }
+}
+function endSpeed(){
+  document.getElementById('sp-game').style.display='none';
+  document.getElementById('sp-done').style.display='block';
+  const total=spOk+spNok;
+  const pct=total>0?Math.round((spOk/total)*100):0;
+  document.getElementById('sp-title').textContent=spOk>=15?'Fulmine! ⚡':spOk>=8?'Molto bene!':'Allenati ancora!';
+  document.getElementById('sp-msg').textContent=`${spOk} helyes szó 60 másodperc alatt — ${pct}% pontosság`;
+  document.getElementById('sp-pills').innerHTML=`<div class="done-pill"><strong>${spOk}</strong><span>Helyes</span></div><div class="done-pill"><strong>${spNok}</strong><span>Hibás</span></div><div class="done-pill"><strong>${pct}%</strong><span>Pontosság</span></div>`;
+}
+function resetSpeed(){
+  if(spTimer)clearInterval(spTimer);
+  document.getElementById('sp-start').style.display='block';
+  document.getElementById('sp-game').style.display='none';
+  document.getElementById('sp-done').style.display='none';
+}
+
+// ══════════════════════════════════════════════════
+// MONDATALKOTÁS
+// ══════════════════════════════════════════════════
+let mondatCat=Object.keys(MONDAT_DATA)[0];
+function renderMondat(){
+  const cats=Object.keys(MONDAT_DATA);
+  document.getElementById('mondat-cats').innerHTML=cats.map(c=>`<button class="ws-btn${c===mondatCat?' active':''}" onclick="setMondatCat('${c}')">${c}</button>`).join('');
+  renderMondatCards();
+}
+function setMondatCat(cat){mondatCat=cat;renderMondat();}
+function renderMondatCards(){
+  const words=MONDAT_DATA[mondatCat]||[];
+  document.getElementById('mondat-cards').innerHTML=words.map((w,i)=>`
+    <div class="mondat-card">
+      <div class="mondat-word">${w.word}</div>
+      <div class="mondat-tr">${w.tr}</div>
+      <div class="mondat-colloc">💡 ${w.colloc}</div>
+      <div style="font-size:0.8rem;color:var(--ink3);margin-bottom:10px">${w.hint}</div>
+      <textarea class="mondat-input" rows="2" placeholder="Írj egy mondatot olaszul ezzel a szóval..." id="mi${i}"></textarea>
+      <div class="mondat-actions">
+        <button class="btn btn-gold btn-sm" onclick="checkMondat(${i})">AI ellenőrzés ✓</button>
+        <button class="btn btn-sm" onclick="resetMondatResult(${i})">Törlés</button>
+      </div>
+      <div class="mondat-result" id="mr${i}"></div>
+    </div>`).join('');
+}
+async function checkMondat(i){
+  const input=document.getElementById('mi'+i).value.trim();
+  if(!input){alert('Írj be egy mondatot!');return;}
+  const w=MONDAT_DATA[mondatCat][i];
+  const result=document.getElementById('mr'+i);
+  result.className='mondat-result checking show';
+  result.textContent='⏳ AI elemzi a mondatodat...';
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:`Sei un insegnante d'italiano per studenti ungheresi al livello B2 (esame PLIDA). Lo studente ha scritto una frase usando la parola "${w.word}" (${w.tr} in ungherese).
+
+Frase dello studente: "${input}"
+
+Valuta brevemente:
+1. ✓ o ✗ — la frase è corretta grammaticalmente?
+2. Se ci sono errori: spiega brevemente cosa correggere (max 2 righe)
+3. Scrivi la versione corretta o migliorata in grassetto
+4. Un breve commento incoraggiante
+
+Sii breve e amichevole! Max 5 righe totali.`}]})});
+    const data=await resp.json();
+    const text=data.content?.map(c=>c.text||'').join('')||'Hiba';
+    result.className='mondat-result done show';
+    result.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong class="good">$1</strong>').replace(/\n/g,'<br>');
+  }catch(e){result.className='mondat-result done show';result.textContent='Nem sikerült ellenőrizni. Próbáld meg újra!';}
+}
+function resetMondatResult(i){
+  document.getElementById('mi'+i).value='';
+  document.getElementById('mr'+i).className='mondat-result';
+  document.getElementById('mr'+i).textContent='';
+}
+
+// ══════════════════════════════════════════════════
+// FORDÍTÁS
+// ══════════════════════════════════════════════════
+let fordCat=Object.keys(FORDITAS_DATA)[0];
+function renderForditas(){
+  const cats=Object.keys(FORDITAS_DATA);
+  document.getElementById('ford-weeks').innerHTML=cats.map(c=>`<button class="ws-btn${c===fordCat?' active':''}" onclick="selectFordCat('${c}')">${c}</button>`).join('');
+  renderFordSentences(fordCat);
+}
+function selectFordCat(cat){fordCat=cat;document.querySelectorAll('.ws-btn').forEach(b=>{b.classList.toggle('active',b.textContent===cat);});renderFordSentences(cat);}
+function renderFordSentences(cat){
+  const sents=FORDITAS_DATA[cat]||[];
+  document.getElementById('ford-sentences').innerHTML=sents.map((s,i)=>`
+    <div class="sentence-card">
+      <div class="sc-num">${i+1}. mondat</div>
+      <div class="sc-hu">${s.hu}</div>
+      <textarea class="sc-input" rows="2" placeholder="Írd ide az olasz fordítást..." id="si${i}"></textarea>
+      <div class="sc-actions">
+        <button class="btn btn-gold btn-sm" onclick="checkSentence(${i})">Ellenőrzés ✓</button>
+        <button class="btn btn-sm" onclick="showCorrect(${i},'${s.correct.replace(/'/g,"\\'")}')">Megmutatom</button>
+      </div>
+      <div class="sc-result" id="sr${i}"></div>
+    </div>`).join('');
+}
+async function checkSentence(i){
+  const input=document.getElementById('si'+i).value.trim();
+  if(!input){alert('Írj be valamit!');return;}
+  const cat=fordCat;const correct=FORDITAS_DATA[cat]?.[i]?.correct||'';
+  const result=document.getElementById('sr'+i);
+  result.className='sc-result checking show';result.textContent='⏳ AI ellenőrzi...';
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:`Sei un insegnante d'italiano per studenti ungheresi (livello B2, PLIDA). Valuta questa traduzione.
+
+Frase ungherese: "${FORDITAS_DATA[cat]?.[i]?.hu}"
+Traduzione dello studente: "${input}"
+Traduzione corretta: "${correct}"
+
+Rispondi così (brevemente, max 4 righe):
+1. ✓ o ✗
+2. Se errata: cosa correggere (1-2 frasi)  
+3. Traduzione corretta in grassetto`}]})});
+    const data=await resp.json();
+    const text=data.content?.map(c=>c.text||'').join('')||'Hiba';
+    result.className='sc-result done show';
+    result.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong class="correct-line">$1</strong>').replace(/\n/g,'<br>');
+  }catch(e){result.className='sc-result done show';result.innerHTML=`<span class="correct-line">Helyes fordítás:</span><br>${correct}`;}
+}
+function showCorrect(i,correct){
+  const result=document.getElementById('sr'+i);
+  result.className='sc-result done show';
+  result.innerHTML=`<span class="note-line">Helyes fordítás:</span><br><strong class="correct-line">${correct}</strong>`;
+}
+
+// ══════════════════════════════════════════════════
+// AI CHAT
+// ══════════════════════════════════════════════════
+let chatTopic=Object.keys(CHAT_TOPICS)[0];
+let chatHistory=[];
+function renderChat(){
+  const topics=Object.keys(CHAT_TOPICS);
+  document.getElementById('chat-topics').innerHTML=topics.map(t=>`<button class="ct-btn${t===chatTopic?' active':''}" onclick="setChatTopic('${t}')">${t}</button>`).join('');
+  renderChatSuggestions();
+}
+function setChatTopic(t){
+  chatTopic=t;
+  chatHistory=[];
+  document.querySelectorAll('.ct-btn').forEach(b=>{b.classList.toggle('active',b.textContent===t);});
+  const box=document.getElementById('chat-box');
+  box.innerHTML=`<div class="chat-msg ai"><div class="msg-label">Professore AI</div>Perfetto! Parliamo di <strong>${t}</strong>. Scrivi pure in italiano — correggerò i tuoi errori gentilmente. Inizia tu! 🇮🇹</div>`;
+  renderChatSuggestions();
+}
+function renderChatSuggestions(){
+  const topic=CHAT_TOPICS[chatTopic];
+  document.getElementById('chat-sugg').innerHTML=(topic?.suggestions||[]).map(s=>`<button class="cs-btn" onclick="useSuggestion('${s.replace(/'/g,"\\'")}')">${s}</button>`).join('');
+}
+function useSuggestion(s){document.getElementById('chat-input').value=s;document.getElementById('chat-input').focus();}
+function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}}
+async function sendChat(){
+  const input=document.getElementById('chat-input').value.trim();
+  if(!input)return;
+  document.getElementById('chat-input').value='';
+  const box=document.getElementById('chat-box');
+  box.innerHTML+=`<div class="chat-msg user"><div class="msg-label">Te</div>${input}</div>`;
+  box.scrollTop=box.scrollHeight;
+  const typing=document.getElementById('chat-typing');
+  typing.classList.add('show');
+  chatHistory.push({role:'user',content:input});
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:CHAT_TOPICS[chatTopic]?.system||'',messages:chatHistory})});
+    const data=await resp.json();
+    const text=data.content?.map(c=>c.text||'').join('')||'...';
+    chatHistory.push({role:'assistant',content:text});
+    typing.classList.remove('show');
+    const parts=text.split('📝 Correzione:');
+    let html=`<div class="chat-msg ai"><div class="msg-label">Professore AI</div>${parts[0].replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</div>`;
+    if(parts[1]){html+=`<div class="chat-msg correction"><div class="msg-label">📝 Correzione</div>${parts[1].replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</div>`;}
+    box.innerHTML+=html;
+    box.scrollTop=box.scrollHeight;
+  }catch(e){typing.classList.remove('show');box.innerHTML+=`<div class="chat-msg ai"><div class="msg-label">Professore AI</div>Mi dispiace, c'è stato un errore. Riprova!</div>`;box.scrollTop=box.scrollHeight;}
+}
+
+// ══════════════════════════════════════════════════
+// KOLLOKÁCIÓK
+// ══════════════════════════════════════════════════
+function renderKollokacio(){
+  document.getElementById('colloc-content').innerHTML=COLLOCATIONS.map(c=>`
+    <div class="colloc-card">
+      <div class="colloc-word">${c.word}</div>
+      <div class="colloc-tr">${c.tr}</div>
+      <div class="colloc-grid">${c.items.map(item=>`
+        <div class="colloc-item">
+          <div class="ci-it">${item.it}</div>
+          <div class="ci-hu">${item.hu}</div>
+          <div class="ci-ex">${item.ex}</div>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════════════
+// TERV
+// ══════════════════════════════════════════════════
+let selectedWeek=null;
+function renderTerv(){
+  document.getElementById('plan-grid').innerHTML=PLAN.map((p,i)=>{
+    const isCurrent=i===0;
+    return`<div class="week-row${isCurrent?' current-week':''}" onclick="toggleWeekDetail(${i})">
+      <div class="wr-num${isCurrent?' cw':''}">${p.week<10?'0'+p.week:p.week}</div>
+      <div class="wr-info"><h4>${p.theme}</h4><p>${p.days[0].slice(0,55)}...</p></div>
+      <span class="wr-badge ${isCurrent?'wb-current':'wb-future'}">${isCurrent?'Jelenlegi':'Közeleg'}</span>
+    </div>`;
+  }).join('');
+}
+function toggleWeekDetail(i){
+  const d=document.getElementById('week-detail');
+  if(selectedWeek===i){d.classList.remove('show');selectedWeek=null;return;}
+  selectedWeek=i;const p=PLAN[i];
+  d.innerHTML=`<div class="wd-title">Hét ${p.week}: ${p.theme}</div><div class="wd-days">${p.days.map((day,di)=>`<div class="wd-day"><h5>${['Hétfő','Kedd','Szerda','Csütörtök','Péntek','Szombat','Vasárnap'][di]}</h5><p>${day}</p></div>`).join('')}</div>`;
+  d.classList.add('show');d.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ══════════════════════════════════════════════════
+// HALADÁS
+// ══════════════════════════════════════════════════
+function renderProgress(){
+  document.getElementById('pr-streak').textContent=S.streak;
+  document.getElementById('pr-total').textContent=WORDS.length;
+  document.getElementById('pr-known').textContent=S.cards.filter(c=>c.level==='known').length;
+  document.getElementById('pr-sessions').textContent=S.sessions;
+  document.getElementById('pr-cats').innerHTML=CATEGORIES.map(cat=>{
+    const ids=WORDS.map((w,i)=>w.cat===cat?i:-1).filter(i=>i>=0);
+    const known=ids.filter(i=>S.cards[i]?.level==='known').length;
+    const pct=Math.round((known/ids.length)*100);
+    return`<div class="cat-progress-item"><div class="cpi-header"><span>${cat}</span><span>${known}/${ids.length}</span></div><div class="cpi-bar"><div class="cpi-fill" style="width:${pct}%"></div></div></div>`;
+  }).join('');
+  const lvls=['new','learning','review','known'],lmap={new:'Új',learning:'Tanul',review:'Ismétlés',known:'Tudja'};
+  document.getElementById('pr-levels').innerHTML=lvls.map(lv=>`<div class="stat"><div class="n" style="font-size:1.5rem">${S.cards.filter(c=>c.level===lv).length}</div><div class="l">${lmap[lv]}</div></div>`).join('');
+  const cal=document.getElementById('pr-cal');cal.innerHTML='';
+  for(let i=27;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const dstr=ds(d);const isT=dstr===today();const done=S.streakDays.includes(dstr);const el=document.createElement('div');el.className='cal-cell'+(done?' cdone':'')+(isT&&!done?' ctoday':'');el.textContent=d.getDate();cal.appendChild(el);}
+}
+
+// ══════════════════════════════════════════════════
+// SZÓTÁR
+// ══════════════════════════════════════════════════
+let dictFilter='Összes';
+function renderSzotar(){
+  const cats=['Összes',...CATEGORIES];
+  document.getElementById('dict-filter').innerHTML=cats.map(c=>`<button class="df-btn${c===dictFilter?' active':''}" onclick="setDictFilter('${c}')">${c}</button>`).join('');
+  const lvMap={new:'lv-new',learning:'lv-learning',review:'lv-review',known:'lv-known'};
+  const lvLbl={new:'Új',learning:'Tanul',review:'Ismétlés',known:'Tudja'};
+  const shown=WORDS.map((w,i)=>({...w,idx:i})).filter(w=>dictFilter==='Összes'||w.cat===dictFilter);
+  document.getElementById('dict-grid').innerHTML=shown.map(w=>{
+    const c=S.cards[w.idx];const days=c.interval===1?'Holnap':`${c.interval}n`;
+    return`<div class="dict-item"><div class="di-it">${w.it}</div><div class="di-hu">${w.hu}</div><span class="di-lv ${lvMap[c.level]||'lv-new'}">${lvLbl[c.level]||'Új'}</span><div class="di-next">${days}</div></div>`;
+  }).join('');
+}
+function setDictFilter(cat){dictFilter=cat;renderSzotar();}
+
+// ══════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════
+initFCStart();
+updateSidebarStreak();
+</script>
+</body>
+</html>
